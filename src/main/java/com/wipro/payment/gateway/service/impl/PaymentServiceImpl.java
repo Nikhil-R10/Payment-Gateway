@@ -50,17 +50,15 @@ public class PaymentServiceImpl implements PaymentService{
 		userCourse.setUserName(user.get());
 		userCourse.setPaymentStatus(PAID);
 		userCourseRepository.save(userCourse);
-		return new ResponseEntity<>("Added to cart", HttpStatus.OK);		
+		return new ResponseEntity<>("Course is added to your learning", HttpStatus.OK);		
 	}
 	
 	public ResponseEntity<List<UserCourses>> viewCoursesInCart(String userId) {
-		Optional<User> user = userRepository.findById(userId);
-		return new ResponseEntity<>(userCourseRepository.findByUserNameAndPaymentStatus(user.get(), IN_CART), HttpStatus.OK);
+		return new ResponseEntity<>(userCourseRepository.findByUserNameAndPaymentStatus(userId, IN_CART), HttpStatus.OK);
 	}
 	
 	public ResponseEntity<String> buyCoursesInCart(String userId) {
-		Optional<User> user = userRepository.findById(userId);
-		List<UserCourses> courses = userCourseRepository.findByUserNameAndPaymentStatus(user.get(), IN_CART);
+		List<UserCourses> courses = userCourseRepository.findByUserNameAndPaymentStatus(userId, IN_CART);
 		courses.forEach(course -> {
 			course.setPaymentStatus(PAID);
 		});

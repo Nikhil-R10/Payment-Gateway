@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.wipro.payment.gateway.service.PaymentService;
 @RestController
 public class PaymentController {
 	
+	@Autowired
 	private PaymentService paymentService;
 	
 	@PostMapping("/course/addToCart")
